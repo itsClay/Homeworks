@@ -1,5 +1,4 @@
 class Stack
-
   def initialize
     # create ivar to store stack here!
     @ivar = []
@@ -19,11 +18,9 @@ class Stack
     # return a copy of the stack
     @ivar
   end
-
 end
 
 class Queue
-
   def initialize
     @ivar = []
   end
@@ -39,7 +36,6 @@ class Queue
   def show
     @ivar
   end
-
 end
 
 class Map
@@ -50,7 +46,6 @@ class Map
   def assign(key, value)
     @map.reject! { |key_val_pair| key_val_pair.first == key }
     @map << [key, value]
-
   end
 
   def lookup(key)
@@ -62,5 +57,4 @@ class Map
   def remove(key)
     @map.reject! { |key_val_pair| key_val_pair.first == key }
   end
-
 end
