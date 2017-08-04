@@ -41,3 +41,26 @@ class Queue
   end
 
 end
+
+class Map
+  def initialize
+    @map = []
+  end
+
+  def assign(key, value)
+    @map.reject! { |key_val_pair| key_val_pair.first == key }
+    @map << [key, value]
+
+  end
+
+  def lookup(key)
+    @map.each do |key_val_pair|
+      return key_val_pair.last if key_val_pair.first == key
+    end
+  end
+
+  def remove(key)
+    @map.reject! { |key_val_pair| key_val_pair.first == key }
+  end
+
+end
