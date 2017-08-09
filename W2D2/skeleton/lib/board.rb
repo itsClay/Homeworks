@@ -13,10 +13,14 @@ class Board
     (0..5).each do |i|
       @cups[i] += [:stone, :stone, :stone, :stone]
     end
+    (7..12).each do |i|
+      @cups[i] += [:stone, :stone, :stone, :stone]
+    end
   end
 
   def valid_move?(start_pos)
-    raise "Invalid starting cup" if start_pos == 6 || start_pos == 13
+    raise "Invalid starting cup" if start_pos == 6 || start_pos > 12
+    raise "Invalid starting cup" if @cups[start_pos].nil?
     raise "Invalid starting cup" if @cups[start_pos].empty?
   end
 
@@ -25,22 +29,29 @@ class Board
 
     move = start_pos
 
-    stones.length.times do
+    until stones.empty? do
       move += 1
       move = 0 if move > 13
 
-      if move == 6 && current_player_name == @name1
-        @cups[move] << stones.shift
-      elsif move == 13 && current_player_name == @name2
-        @cups[move] << stones.shift
-      else
-        @cups[move] << stones.shift
-      end
+      next if move == 6 && current_player_name == @name2
+      next if move == 13 && current_player_name == @name1
+
+      @cups[move] << stones.shift
+
     end
+    render
+    next_turn(move)
   end
 
   def next_turn(ending_cup_idx)
     # helper method to determine what #make_move returns
+    if ending_cup_idx == 6 || ending_cup_idx == 13
+      :prompt
+    elsif @cups[ending_cup_idx].count == 1
+      :switch
+    else
+      ending_cup_idx
+    end
   end
 
   def render
@@ -52,8 +63,25 @@ class Board
   end
 
   def one_side_empty?
+    if @cups[0..5].all? {|x| x.empty?}
+      return true
+    elsif @cups[7..12].all? {|x| x.empty?}
+      return true
+    end
+    false
   end
 
   def winner
+    player1_count = @cups[6].count
+    player2_count = @cups[13].count
+
+    case player1_count <=> player2_count
+    when -1
+      @name2
+    when 0
+      :draw
+    when 1
+      @name1
+    end
   end
 end
