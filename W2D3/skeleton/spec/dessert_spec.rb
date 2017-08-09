@@ -35,11 +35,17 @@ describe Dessert do
   end
 
   describe "#mix!" do
-    it "shuffles the ingredient array"
+    it "shuffles the ingredient array" do
+      pie.ingredients = ["apple", "sugar", "crust"]
+      expect(pie.ingredients).not_to eq(["apple", "sugar", "crust"])
+    end
   end
 
   describe "#eat" do
-    it "subtracts an amount from the quantity"
+    it "subtracts an amount from the quantity" do
+      pie.amount = 10
+      expect(pie.eat(1)).to eq(9)
+    end
 
     it "raises an error if the amount is greater than the quantity"
   end
