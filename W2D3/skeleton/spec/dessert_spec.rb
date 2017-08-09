@@ -6,7 +6,7 @@ Instructions: implement all of the pending specs (the `it` statements without bl
 =end
 
 describe Dessert do
-  let(:chef) { double("chef") }
+  let(:chef) { double("chef", name:"Filbert") }
   subject(:pie) { Dessert.new('Apple', 10, chef)}
 
   describe "#initialize" do
@@ -43,18 +43,24 @@ describe Dessert do
 
   describe "#eat" do
     it "subtracts an amount from the quantity" do
-      pie.amount = 10
-      expect(pie.eat(1)).to eq(9)
+      pie.eat(1)
+      expect(pie.quantity).to eq(9)
     end
 
-    it "raises an error if the amount is greater than the quantity"
+    it "raises an error if the amount is greater than the quantity" do
+      expect(pie.eat(11)).to raise_error("not enough left!")
+    end
   end
 
   describe "#serve" do
-    it "contains the titleized version of the chef's name"
+    it "contains the titleized version of the chef's name" do
+      expect(chef).to receive(:titleize).and_return("Chef Filbert the Great Baker")
+    end
   end
 
   describe "#make_more" do
     it "calls bake on the dessert's chef with the dessert passed in"
+    expect(chef).to_receive(:bake)).with(pie)
+    pie.make_more
   end
 end
