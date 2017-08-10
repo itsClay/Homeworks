@@ -1,7 +1,7 @@
 FISH = ['fish', 'fiiish', 'fiiiiish', 'fiiiish', 'fffish',
         'ffiiiiisshh', 'fsh', 'fiiiissshhhhhh']
 
-# n squared
+# O(n^2) FISH
 def bubble_fish(array)
   sorted = false
   until sorted
@@ -16,10 +16,10 @@ def bubble_fish(array)
   array.last
 end
 
-# n log n
+# O(n log n) FISH
 class Array
   def quick_sort(&prc)
-    prc ||= Proc.new {|x, y| x <=> y}
+    prc ||= Proc.new {|x, y| x.length <=> y.length}
 
     return array if array.size < 2
 
@@ -37,8 +37,7 @@ def dominant_octopus(array)
   array.quick_sort(&prc)[0]
 end
 
-
-
+# O(n) FISH
 def clever_octopus(array)
   biggest_fish = array.first
 
