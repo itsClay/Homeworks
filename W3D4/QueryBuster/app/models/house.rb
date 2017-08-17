@@ -25,6 +25,6 @@ class House < ApplicationRecord
       seeds << plant.seeds
     end
 
-    plants
+    seeds
   end
 end
