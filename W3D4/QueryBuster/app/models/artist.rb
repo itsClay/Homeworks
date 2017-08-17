@@ -26,6 +26,6 @@ class Artist < ApplicationRecord
       tracks_count[album] = album.tracks.length
 
     end
-    tracks_count.length
+    tracks_count
   end
 end
