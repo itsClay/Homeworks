@@ -125,7 +125,7 @@ class MetaCorgiSnacks
         raise "get requires a <food_type> and info or tastiness"
       end
 
-      p @snack_box
+      p @snack_box.send("get_#{search_conditions[0]}_#{search_conditions[1]}")
       p @snack_box[@box_id]
       p search_conditions[0]
       p search_conditions[1]
