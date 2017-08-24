@@ -30,7 +30,16 @@ button:hover {
 	background-color: $blue;
 	border-color: $darkest-blue;
 }
+button:active {
 
+}
+a:hover {
+		text-decoration: underline;
+}
+
+.hidden {
+	display: none;
+}
 /*
 	Header Rules
 */

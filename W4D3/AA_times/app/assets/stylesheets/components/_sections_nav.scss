@@ -1,0 +1,24 @@
+.sections-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid $light-gray;
+  position: relative;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.sections-nav li:hover {
+  background-color: $light-gray;
+}
+
+.sections-nav li a:hover {
+  text-decoration: none;
+}
+
+.sections-nav .underline-hvr:hover {
+	text-decoration: underline;
+  background-color: transparent;
+}
