@@ -7,6 +7,9 @@
   padding: 9px;
   border: 1px solid $light-gray;
   width: 205px;
+  z-index: 1;
+  border-radius: 3px;
+  box-shadow: -1px 4px 6px 1px rgba(0, 0, 0, 0.09);
 }
 
 .gear-dropdown li{
