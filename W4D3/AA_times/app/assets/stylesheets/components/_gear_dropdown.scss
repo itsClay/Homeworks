@@ -10,8 +10,27 @@
   z-index: 1;
   border-radius: 3px;
   box-shadow: -1px 4px 6px 1px rgba(0, 0, 0, 0.09);
+  font-family: $sans-serif;
 }
 
 .gear-dropdown li{
   position: relative;
+}
+
+.gear-dropdown li a:hover {
+  background-color: $light-gray
+}
+
+.help {
+  font-weight: 400;
+  border-top: 1px solid $light-gray
+}
+
+.dropdown-subtitle {
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.dropdown-subtitle~li {
+  padding: 4px 0px 4px 0px;
 }
