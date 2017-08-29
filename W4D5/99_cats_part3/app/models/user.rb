@@ -27,7 +27,7 @@ class User < ApplicationRecord
     cat.user_id == self.id
   end
 
-  def password=(password)
+  def password=(passwor
     @password = password
     self.password_digest = BCrypt::Password.create(password)
   end

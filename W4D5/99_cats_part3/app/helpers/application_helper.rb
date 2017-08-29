@@ -7,7 +7,3 @@ module ApplicationHelper
     html.html_safe
   end
 end
-
-
-
-# "<input type=\"hidden\" name=\"authenticiy_token\" value=\"#{h(form_authenticity_token)}/>\"".html_safe
