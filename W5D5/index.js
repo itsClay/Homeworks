@@ -17,7 +17,6 @@ const reader = readline.createInterface({
   output: process.stdout
 });
 
-
 function teaAndBiscuits() {
   let first, second;
 
