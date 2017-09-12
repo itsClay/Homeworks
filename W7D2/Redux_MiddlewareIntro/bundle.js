@@ -11973,11 +11973,23 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  var store = (0, _redux.createStore)(_root_reducer2.default, preloadedState);
+  var store = (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(addLoggingToDispatch));
+
   store.subscribe(function () {
     localStorage.state = JSON.stringify(store.getState());
   });
   return store;
+};
+
+var addLoggingToDispatch = function addLoggingToDispatch(store) {
+  return function (next) {
+    return function (action) {
+      console.log('state pre-action: ', store.getState());
+      console.log('action: ', action);
+      next(action);
+      console.log('state post-action: ', store.getState());
+    };
+  };
 };
 
 exports.default = configureStore;
@@ -13011,26 +13023,46 @@ var _root2 = _interopRequireDefault(_root);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var addLoggingToDispatch = function addLoggingToDispatch(store) {
-  return function (dispatch) {
-    return function (action) {
-      console.log('Action receieved: ', action);
-      console.log('State pre-dispatch', store.getState());
-      var result = dispatch(action); //is next the same as our dispatch function?
-      console.log('State post-dispatch', store.getState());
-
-      return result;
-    };
-  };
-};
-
 document.addEventListener('DOMContentLoaded', function () {
   var preloadedState = localStorage.state ? JSON.parse(localStorage.state) : {};
   var store = (0, _store2.default)(preloadedState);
 
+  // phase 1: pre redux / antipattern
+  // store.dispatch = addLoggingToDispatch(store);
+
+  // phase 2
+  // store = applyMiddlewares(store, [addLoggingToDispatch]);
+
   var root = document.getElementById('content');
   _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 });
+
+// phase 1: pre redux
+// const addLoggingToDispatch = (store) => {
+//   const originDispatch = store.dispatch;
+//   return (action) => {
+//     console.log('state pre-action: ', store.getState());
+//     console.log('action: ', action);
+//     store.dispatch(action);
+//     console.log('state post-action: ', store.getState());
+//   };
+// };
+
+// const addLoggingToDispatch = store => next => action => {
+//   console.log('state pre-action: ', store.getState());
+//   console.log('action: ', action);
+//   next(action);
+//   console.log('state post-action: ', store.getState());
+// };
+
+// phase 2 - generate a higher level function to apply our middleware
+// const applyMiddlewares = (store, middlewares) =>  {
+//   let dispatch = store.dispatch;
+//   middlewares.forEach( (ware) => {
+//     dispatch = ware(store)(dispatch);
+//   });
+//   return Object.assign({}, store, { dispatch });
+// };
 
 /***/ }),
 /* 148 */
