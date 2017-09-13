@@ -12089,6 +12089,12 @@ var _root_reducer2 = _interopRequireDefault(_root_reducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var configureStore = function configureStore() {
+  var preLoadedState = {};
+  // i missed returning this last time (hard bug to catch)
+  return (0, _redux.createStore)(_root_reducer2.default, preLoadedState);
+};
+
 /***/ }),
 /* 107 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -12182,13 +12188,18 @@ var _root2 = _interopRequireDefault(_root);
 
 var _api_util = __webpack_require__(115);
 
+var _giphy_actions = __webpack_require__(58);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 document.addEventListener('DOMContentLoaded', function () {
   var root = document.getElementById('root');
-  // const store = configureStore();
+  var store = (0, _store2.default)();
 
-  // window.store = store;
+  // remove when done testing store
+  window.store = store;
+  window.fetchSearchGiphys = _api_util.fetchSearchGiphys;
+  window.receiveSearchGiphys = _giphy_actions.receiveSearchGiphys;
 });
 
 /***/ }),
@@ -12200,12 +12211,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
 var _giphy_actions = __webpack_require__(58);
 
+var GiphysReducer = function GiphysReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _giphy_actions.RECEIVE_SEARCH_GIPHYS:
+      return action.giphys;
+    default:
+      return state;
+  }
+};
+
 /***/ }),
 /* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
 var _redux = __webpack_require__(57);
 
@@ -12214,6 +12241,10 @@ var _giphys_reducer = __webpack_require__(113);
 var _giphys_reducer2 = _interopRequireDefault(_giphys_reducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = (0, _redux.combineReducers)({
+  giphys: _giphys_reducer2.default
+});
 
 /***/ }),
 /* 115 */
