@@ -21,4 +21,6 @@ const addLoggingToDispatch = store => next => action => {
   console.log('state post-action: ', store.getState());
 };
 
+// const sillyWare = 
+
 export default configureStore;

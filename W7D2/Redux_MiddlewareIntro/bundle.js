@@ -11992,6 +11992,8 @@ var addLoggingToDispatch = function addLoggingToDispatch(store) {
   };
 };
 
+// const sillyWare = 
+
 exports.default = configureStore;
 
 /***/ }),
